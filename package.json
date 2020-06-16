@@ -1,7 +1,6 @@
 {
   "name": "ema-john-simple",
   "version": "0.1.0",
-  "homepage": "http://saberhr.com/react/ema-john",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
