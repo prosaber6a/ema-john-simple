@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { getDatabaseCart } from '../../utilities/databaseManager';
+import { getDatabaseCart, removeFromDatabaseCart } from '../../utilities/databaseManager';
 import fakeData from '../../fakeData';
+import ReviewItem from '../ReviewItem/ReviewItem';
 
 
 const Review = () => {
     const [cart, setCartItems] = useState([]);
+
+    const removeProductItem = (productKey) => {
+        console.log('remvoe clicked', productKey);
+        const newCart = cart.filter( pd => pd.key !== productKey );
+        setCartItems( newCart );
+        removeFromDatabaseCart(productKey);
+    }
+
     useEffect( () => {
         const savedCart = getDatabaseCart();
         const productKeys = Object.keys(savedCart);
@@ -22,6 +31,7 @@ const Review = () => {
     return (
         <div>
             <h2>Cart Item: {cart.length}</h2>
+            {cart.map( pd => <ReviewItem key={pd.key} removeProduct={removeProductItem} product={pd}></ReviewItem> )}
         </div>
     );
 };
